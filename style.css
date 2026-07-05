@@ -1,0 +1,112 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+h1 {
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+#status {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #34495e;
+    height: 30px;
+}
+
+/* The Main 9x9 Grid System */
+.ultimate-board {
+    display: grid;
+    grid-template-columns: repeat(9, 60px);
+    grid-template-rows: repeat(9, 60px);
+    background-color: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 4px solid #2c3e50; /* Thick outer border */
+}
+
+/* Base styling for every single cell */
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    background-color: #fff;
+    transition: background-color 0.2s;
+    border: 1px solid #bdc3c7; /* Normal thin cell dividers */
+}
+
+/* --- THE 3x3 BLOCK BORDER LOGIC --- */
+
+/* Thicken right border for columns 3 and 6 */
+.cell:nth-child(3n):not(:nth-child(9n)) {
+    border-right: 4px solid #2c3e50;
+}
+
+/* Thicken bottom border for rows 3 and 6 */
+/* Cells 19-27 are Row 3, Cells 46-54 are Row 6 */
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 4px solid #2c3e50;
+}
+
+/* --- GAMEPLAY STATES --- */
+
+/* Highlight cells that the player is legally allowed to play in */
+.cell.active-board {
+    background-color: #e8f8f5;
+}
+.cell.active-board:hover {
+    background-color: #d1f2eb;
+}
+
+/* Visual markers for X and O moves */
+.cell.X { color: #e74c3c; }
+.cell.O { color: #3498db; }
+
+/* Styles for local boards that have been won/tied */
+.cell.won-X { background-color: #fadbd8 !important; color: #e74c3c; opacity: 0.6; }
+.cell.won-O { background-color: #d6eaf8 !important; color: #3498db; opacity: 0.6; }
+.cell.won-TIE { background-color: #eaeded !important; color: #7f8c8d; }
+
+#reset-btn {
+    margin-top: 25px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#reset-btn:hover {
+    background-color: #34495e;
+}
+
+/* Soft red background for individual X moves */
+.cell.X { 
+    color: #e74c3c; 
+    background-color: #fdebd0; 
+} 
+
+/* Soft blue background for individual O moves */
+.cell.O { 
+    color: #3498db; 
+    background-color: #ebf5fb; 
+}
